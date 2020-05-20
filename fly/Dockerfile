@@ -11,6 +11,9 @@ RUN apk add --update --no-cache \
 RUN curl -sL https://github.com/concourse/concourse/releases/download/v${CONCOURSE_VERSION}/fly-${CONCOURSE_VERSION}-linux-amd64.tgz -o /tmp/fly-linux-amd64.tgz && \
     tar -xvzf /tmp/fly-linux-amd64.tgz -C /usr/local/bin && \
     curl -sL https://taskfile.dev/install.sh | sh
+RUN apk update \
+     && apk add jq \
+     && rm -rf /var/cache/apk/*
 
 FROM resource
 ENTRYPOINT [ "fly" ]
